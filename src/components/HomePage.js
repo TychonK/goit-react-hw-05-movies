@@ -9,16 +9,17 @@ export default function HomePage() {
         axios.get("https://api.themoviedb.org/3/trending/movie/day?api_key=42eba2050345b62282020883d06ba519")
             .then((res) => { return res.data.results })
             .then((data) => { setFilms([...data]) })
-    }, [])
-
-    const markup = films.map((film, index) => {
-        return (
-            <li key={index} id={film.id}>
-                { film.original_title }
-            </li>
-        )  
     })
 
+    let markup
+
+    markup = films.map((film, index) => {
+        return (
+            <li key={index} id={film.id}>
+               <Link to={`/movies/${film.id}`}>{film.original_title}</Link>
+            </li>
+        )
+    })
       
     
     return (

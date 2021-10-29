@@ -9,3 +9,23 @@ nav{
 .active {
   color: black;
 }
+
+.form-control {
+  max-width: 300px;
+  display: inline-block;
+}
+
+.poster {
+  display: flex;
+}
+
+.card {
+  text-align: center;
+  min-width: 250px;
+  max-width: 250px;
+}
+
+.cast_list {
+  display: flex;
+  flex-wrap: wrap;
+}
