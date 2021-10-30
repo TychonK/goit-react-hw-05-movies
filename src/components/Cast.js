@@ -10,6 +10,10 @@ export default function Cast() {
             .then((res) => { return res.data.cast })
             .then((cast) => {
                 setCast(cast)
+                window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+        });
         })
     }, [])
 

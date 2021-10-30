@@ -1,10 +1,15 @@
 import { useParams, Link, useRouteMatch, useHistory } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, lazy, Suspense } from 'react'
 import axios from 'axios'
 
 import { Route } from "react-router-dom"
-import Cast from './Cast'
-import Reviews from './Reviews'
+
+import Loader from "./Loader"
+// import Cast from './Cast'
+// import Reviews from './Reviews'
+
+const Cast = lazy(() => import("./Cast"))
+const Reviews = lazy(() => import("./Reviews"))
 
 export default function MovieDetailsPage() {
     const { movieId } = useParams();
@@ -57,12 +62,14 @@ export default function MovieDetailsPage() {
                 </li>
             </ul>
             <hr />
-            <Route path="/movies/:movieId/cast">
-                <Cast/>
-            </Route>
-            <Route path="/movies/:movieId/reviews">
-                <Reviews/>
-            </Route>
+            <Suspense fallback={<Loader/>}>
+                <Route path="/movies/:movieId/cast">
+                    <Cast/>
+                </Route>
+                <Route path="/movies/:movieId/reviews">
+                    <Reviews/>
+                </Route>
+            </Suspense>
         </>
     )
 }

@@ -9,7 +9,7 @@ export default function HomePage() {
         axios.get("https://api.themoviedb.org/3/trending/movie/day?api_key=42eba2050345b62282020883d06ba519")
             .then((res) => { return res.data.results })
             .then((data) => { setFilms([...data]) })
-    })
+    }, [])
 
     let markup
 
