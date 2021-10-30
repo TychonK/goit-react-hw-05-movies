@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import {Link, useRouteMatch} from 'react-router-dom'
+import {Link, useRouteMatch, useHistory} from 'react-router-dom'
 
 export default function MoviePage() {
     const [film, setFilm] = useState(null)
     const [markup, setMarkup] = useState(null)
     const { url } = useRouteMatch();
+    const history = useHistory();
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -30,10 +31,17 @@ export default function MoviePage() {
        )
     }, [film])
 
+    const handleGoBack = () => {
+        history.goBack()
+    }
+
     
 
     return (
         <>
+        <button type="button" onClick={handleGoBack} className="btn btn-primary hBack">
+              &larr; Go back 
+        </button>
         <form onSubmit={handleSubmit}>
             <input name="search" id="search" autoFocus className="form-control"></input>
             <button type="submit" className="btn btn-success">Search</button>

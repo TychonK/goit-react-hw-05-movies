@@ -1,4 +1,4 @@
-import { useParams, Link, useRouteMatch } from 'react-router-dom'
+import { useParams, Link, useRouteMatch, useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
@@ -10,6 +10,7 @@ export default function MovieDetailsPage() {
     const { movieId } = useParams();
     const [movieInfo, setMovieInfo] = useState({});
     const { url } = useRouteMatch();
+    const history = useHistory();
     
     useEffect(() => {
         axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=42eba2050345b62282020883d06ba519&language=en-US`)
@@ -19,8 +20,15 @@ export default function MovieDetailsPage() {
             })
     }, [])
 
+    const handleGoBack = () => {
+        history.goBack()
+    }
+
     return (
         <>
+            <button type="button" onClick={handleGoBack} className="btn btn-primary hBack">
+              &larr; Go back 
+        </button>
             <div className="poster">
                 <img width="25%" src={`https://image.tmdb.org/t/p/original/${movieInfo.poster_path}`}></img>
                 <div>
